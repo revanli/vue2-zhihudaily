@@ -2,7 +2,7 @@
   <nav class="slider">
     <div class="swiper-container">
       <div class="swiper-wrapper">
-        <div class="swiper-slider" 
+        <div class="swiper-slide" 
              v-for="(item, index) in topStories" :key="index" 
              :style="{ backgroundImage: 'url(' + replaceImgUrl(item.image) + ')'}">
           <!-- <router-link :to="{path: '/detail', query: { id: item.id }}"></router-link> -->
@@ -21,8 +21,8 @@
 
 <script>
 import Swiper from 'swiper'
-import { replaceImgUrl } from '../../../components/common/mixin'
-import { latestNews } from '../../../service/getData'
+import { replaceImgUrl } from 'src/components/common/mixin'
+import { latestNews } from 'src/service/getData'
 
 export default {
   data () {
@@ -33,7 +33,6 @@ export default {
   mounted () {
     // 获取最新的stories
     latestNews().then(res => {
-      console.log('topStories', res.top_stories)
       this.topStories = res.top_stories
     }).then(() => {
       new Swiper('.swiper-container', {
@@ -55,6 +54,10 @@ export default {
 
 <style lang="scss">
 @import '../../../style/swiper.min.css';
+
+.slider {
+  margin-top: 50px
+}
 
 .swiper-container {
   height: 230px;

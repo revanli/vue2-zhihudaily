@@ -1,19 +1,22 @@
 <template>
-<div>
+<div id="wrapper">
   <head-top></head-top>
   <slider></slider>
+  <story-list></story-list>
 </div>
 </template>
 
 <script>
-import headTop from '../../components/header/head'
+import headTop from 'src/components/header/head'
 import slider from './children/slider'
-import { latestNews } from '../../service/getData'
+import storyList from 'src/components/common/storylist'
+import { latestNews } from 'src/service/getData'
 
 export default {
   components: {
     headTop,
-    slider
+    slider,
+    storyList
   },
   data () {
     return {
