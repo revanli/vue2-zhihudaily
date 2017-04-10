@@ -5,13 +5,11 @@
         <div class="swiper-slide" 
              v-for="(item, index) in topStories" :key="index" 
              :style="{ backgroundImage: 'url(' + replaceImgUrl(item.image) + ')'}">
-          <!-- <router-link :to="{path: '/detail', query: { id: item.id }}"></router-link> -->
-          <div class="swiper-mask"></div>
-          <h1 class="slider-title">{{ item.title }}</h1>
+          <router-link :to="'/detail/' + item.id" :key="item.id">
+            <div class="swiper-mask"></div>
+            <h1 class="slider-title">{{ item.title }}</h1>
+          </router-link>
         </div>
-        <!-- <div v-for="item in top_stories" class="swiper-slide" :style="{ backgroundImage: 'url(' + replace(item.image) + ')' }" v-link="{name: 'detail', params: { id: item.id }}"> -->
-          <!-- <div class="swiper-mask"></div>
-          <h1 class="slider-title"></h1> -->
       </div>
       <!-- Pagination -->
       <div class="swiper-pagination"></div>

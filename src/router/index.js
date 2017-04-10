@@ -5,6 +5,7 @@ import App from '../App'
 Vue.use(Router)
 
 const home = r => require.ensure([], () => r(require('../pages/home/home')), 'home')
+const detail = r => require.ensure([], () => r(require('../pages/detail/detail')), 'detail')
 
 export default new Router({
   routes: [
@@ -20,6 +21,11 @@ export default new Router({
         {
           path: '/home',
           component: home
+        },
+        // 详情页
+        {
+          path: '/detail/:id',
+          component: detail
         }
       ]
     }

@@ -19,7 +19,7 @@
       </header>
       <section class="themes-list">
         <router-link :to="{path: '/'}" class="link-home">
-          <i class="iconfont">&#xe61b</i>首页
+          <p><i class="iconfont">&#xe61b</i>首页</p>
         </router-link>
         <ul>
           <router-link :to="{path: '/'}" v-for="item in themeList" tag="li" :key="item.id" class="theme">
@@ -119,11 +119,14 @@ export default {
     flex-direction: row;
     color: #ffffff;
     > div {
+      position: relative;
       padding-left: 52px;
       flex: 1;
       font-size: 13px;
       font-weight: 300;
-      position: relative;
+      > p {
+        color: #fff;
+      }
       > i {
         position: absolute;
         top: 0;
@@ -136,7 +139,7 @@ export default {
 .themes-list {
   padding-bottom: 20px;
   background: #f9f9f9;
-  .link-home {
+  .link-home p {
     position: relative;
     background: #f9f9f9;
     color: #00A2EA;
@@ -145,20 +148,20 @@ export default {
     font-size: 15px;
     padding-left: 55px;
     cursor: pointer;
-  }
-  >i {
-    color: #00A2EA;
-    font-size: 20px;
-    position: absolute;
-    top: 0px;
-    left: 20px;
+    > i {
+      color: #00A2EA;
+      font-size: 20px;
+      position: absolute;
+      top: 0px;
+      left: 20px;
+    }
   }
   .theme {
     height: 47px;
     line-height: 47px;
     display: flex;
     flex-direction: row;
-    padding-left: 15px;
+    padding: 0 15px;
     cursor: pointer;
     > p {
       flex: 1;
