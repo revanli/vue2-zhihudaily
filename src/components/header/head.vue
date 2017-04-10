@@ -1,7 +1,7 @@
 <template>
   <header class="head">
     <div class="container">
-      <div class="header-icon"><i class="iconfont">&#xe612</i></div>
+      <div class="header-icon" @click="toggleMenu"><i class="iconfont">&#xe612</i></div>
       <div class="header-title"><p>首页</p></div>
       <div class="header-icon"><i class="iconfont">&#Xe610</i></div>
       <div class="header-icon"><i class="iconfont">&#Xe619</i></div>
@@ -11,9 +11,13 @@
 </template>
 
 <script>
-  export default {
+import { mapActions } from 'vuex'
 
+export default {
+  methods: {
+    ...mapActions(['toggleMenu'])
   }
+}
 </script>
 
 <style lang="scss" scoped>

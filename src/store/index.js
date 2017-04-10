@@ -7,7 +7,7 @@ import getters from './getters'
 Vue.use(Vuex)
 
 const state = {
-
+  isShowMenu: false // 是否显示theme menu
 }
 
 export default new Vuex.Store({
