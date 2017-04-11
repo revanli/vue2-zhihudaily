@@ -63,6 +63,13 @@ const themes = () => fetch('GET', '/4/themes', {})
 const themeConent = id => fetch('GET', '/4/theme/' + id, {})
 
 /**
+ * 过往主题日报内容
+ * @param {number} [themeId] [主题日报ID]
+ * @param {number} [storyId] [新闻ID]
+ */
+const themeConentBefore = (themeId, storyId) => fetch('GET', '/4/theme/' + themeId + '/before/' + storyId, {})
+
+/**
  * 新闻推荐者
  * @param {number} [id] [新闻ID]
  */
@@ -85,6 +92,7 @@ export {
   newShortComments,
   themes,
   themeConent,
+  themeConentBefore,
   recommenders,
   beforeSectionNews
 }

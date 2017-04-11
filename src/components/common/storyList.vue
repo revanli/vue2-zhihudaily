@@ -2,7 +2,7 @@
   <div class="storylist">
     <div class="container">
       <ul>
-        <router-link :to="{path: '/home'}" v-for="item in storyListArr" tag="li" :key="item.id" class="list-detail">
+        <router-link :to="'/detail/' + item.id" v-for="item in storyListArr" tag="li" :key="item.id" class="list-detail">
           <section class="list-content">
             <hgroup class="list-title">
               <p>{{ item.title }}</p>

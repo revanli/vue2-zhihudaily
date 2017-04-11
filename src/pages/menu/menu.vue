@@ -22,7 +22,7 @@
           <p><i class="iconfont">&#xe61b</i>首页</p>
         </router-link>
         <ul>
-          <router-link :to="{path: '/'}" v-for="item in themeList" tag="li" :key="item.id" class="theme">
+          <router-link :to="'/theme/' + item.id" v-for="item in themeList" tag="li" :key="item.id" class="theme">
             <p>{{ item.name }}</p>
             <i>+</i>
           </router-link>

@@ -7,15 +7,15 @@
   <section class="detail">
     <div class="container">
       <!-- 详情页图 -->
-      <section class="detail-thumbnail" v-if="thumbnail" :style="{ backgroundImage: 'url(' + replaceImgUrl(thumbnail) + ')'}">
-        <div class="detail-thumbnail-mask">
+      <section class="detail-cover" v-if="image" :style="{ backgroundImage: 'url(' + replaceImgUrl(image) + ')'}">
+        <div class="detail-cover-mask">
           <h1 class="detail-title">{{ title }}</h1>
           <p class="detail-image-source">{{ imageSource }}</p>
         </div>
       </section>
 
       <!-- 推荐者 -->
-      <section class="recommenders">
+      <section class="recommenders" v-if="recommenders.length > 0">
         <!-- <router-link :to="/recommenders"> -->
           <p>推荐者</p>
           <div class="recomentders-item" v-for="item in recommenders">
@@ -87,3 +87,50 @@ export default {
   mixins: [replaceImgUrl]
 }
 </script>
+
+<style lang="scss">
+.detail {
+  margin-top: 50px;
+}
+.detail-cover {
+  position: relative;
+  z-index: 0;
+  height: 200px;
+  width: 100%;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  .detail-cover-mask {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 100%);
+    background-image: linear-gradient(bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 100%);
+  }
+  .detail-title {
+    position: absolute;
+    bottom: 23px;
+    line-height: 1.2;
+    left: 0;
+    padding: 0 18px;
+    font-weight: 300;
+    font-size: 21px;
+    color: #ffffff;
+  }
+  .detail-image-source {
+    position: absolute;
+    bottom: 8px;
+    right: 0;
+    padding: 0 18px;
+    font-weight: 300;
+    font-size: 12px;
+    color: #d3d3d3;
+  }
+}
+
+
+
+  
+</style>

@@ -6,6 +6,7 @@ Vue.use(Router)
 
 const home = r => require.ensure([], () => r(require('../pages/home/home')), 'home')
 const detail = r => require.ensure([], () => r(require('../pages/detail/detail')), 'detail')
+const theme = r => require.ensure([], () => r(require('../pages/theme/theme')), 'theme')
 
 export default new Router({
   routes: [
@@ -26,6 +27,11 @@ export default new Router({
         {
           path: '/detail/:id',
           component: detail
+        },
+        // 主题页
+        {
+          path: '/theme/:id',
+          component: theme
         }
       ]
     }
