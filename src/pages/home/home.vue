@@ -1,6 +1,6 @@
 <template>
   <div id="wrapper">
-    <head-top></head-top>
+    <head-top :is-home="true" :header-title="headerTitle" :go-back="false"></head-top>
     <slider></slider>
     <story-list></story-list>
     <sliderMenu></sliderMenu>
@@ -21,6 +21,7 @@ export default {
   data () {
     return {
       // topStories: {}
+      headerTitle: '首页'
     }
   },
   components: {

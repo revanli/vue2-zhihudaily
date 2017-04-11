@@ -2,7 +2,22 @@
 <template>
 <div>
   <!-- 详情页头部 -->
-  <detail-header></detail-header>
+  <detail-header :is-home="false" :header-title="headerTitle" :go-back="true">
+    <div slot="header-detail" class="header-detail">
+      <div class="header-icon">
+        <i class="iconfont">&#xe61f</i>
+      </div>
+      <div class="header-icon">
+        <i class="iconfont">&#xe604</i>
+      </div>
+      <div class="header-icon">
+        <i class="iconfont">&#xe606</i>
+      </div>
+      <div class="header-icon">
+        <i class="iconfont">&#xe611</i>
+      </div>
+    </div>
+  </detail-header>
 
   <section class="detail">
     <div class="container">
@@ -52,6 +67,7 @@ import { newContent } from 'src/service/getData'
 export default {
   data () {
     return {
+      headerTitle: '', // 导航栏标题
       title: '',  // 新闻标题
       image: '', // 新闻图片
       imageSource: '', // 新闻图片来源
@@ -89,6 +105,19 @@ export default {
 </script>
 
 <style lang="scss">
+.header-detail {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  .header-icon {
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+    > i {
+      line-height: 53px;
+    }
+  }
+}
 .detail {
   margin-top: 50px;
 }
