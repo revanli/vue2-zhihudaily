@@ -63,6 +63,7 @@ import detailHeader from 'src/components/header/head'
 import detailContent from './children/detailContent'
 import { replaceImgUrl } from 'src/components/common/mixin'
 import { newContent } from 'src/service/getData'
+import { mapMutations } from 'vuex'
 
 export default {
   data () {
@@ -87,6 +88,8 @@ export default {
   methods: {
     initData () {
       let newId = this.$route.params.id
+      // 保存进vuex
+      this.SAVE_DETAILID(newId)
       newContent(newId).then(res => {
         this.detailContent = res.body
         this.image = res.image
@@ -98,7 +101,10 @@ export default {
           this.thumbnail = res.section.thumbnail
         }
       })
-    }
+    },
+    ...mapMutations([
+      'SAVE_DETAILID'
+    ])
   },
   mixins: [replaceImgUrl]
 }

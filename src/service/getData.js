@@ -52,6 +52,13 @@ const newLongComments = id => fetch('GET', '/4/story/' + id + '/long-comments', 
 const newShortComments = id => fetch('GET', '/4/story/' + id + '/short-comments', {})
 
 /**
+ * 新闻对应短评论查看
+ * @param {number} [id] [新闻ID]
+ * @returns {JSON}
+ */
+const newShortCommentsBefore = (detail_id, new_id) => fetch('GET', '/4/story/' + detail_id + '/short-comments/before/' + new_id, {})
+
+/**
  * 主题日报列表
  */
 const themes = () => fetch('GET', '/4/themes', {})

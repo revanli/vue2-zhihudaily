@@ -13,10 +13,11 @@
       <div class="header-icon" v-if="isHome">
         <i class="iconfont">&#Xe610</i>
       </div>
-      <div class="header-icon" v-if="isHome">
+      <div class="header-icon" v-if="isHome"> 
         <i class="iconfont">&#Xe619</i>
       </div>
       <slot name="header-detail"></slot>
+      <slot name="header-comments"></slot>
     </div>
   </header>
 </template>

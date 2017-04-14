@@ -7,7 +7,8 @@ import getters from './getters'
 Vue.use(Vuex)
 
 const state = {
-  isShowMenu: false // 是否显示theme menu
+  isShowMenu: false, // 是否显示theme menu
+  detailId: 0 // 新闻的ID
 }
 
 export default new Vuex.Store({
