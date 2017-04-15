@@ -7,6 +7,7 @@ Vue.use(Router)
 const home = r => require.ensure([], () => r(require('../pages/home/home')), 'home')
 const detail = r => require.ensure([], () => r(require('../pages/detail/detail')), 'detail')
 const theme = r => require.ensure([], () => r(require('../pages/theme/theme')), 'theme')
+const comments = r => require.ensure([], () => r(require('../pages/comments/comments')), 'comments')
 
 export default new Router({
   routes: [
@@ -32,6 +33,11 @@ export default new Router({
         {
           path: '/theme/:id',
           component: theme
+        },
+        // 评论页
+        {
+          path: '/comments',
+          component: comments
         }
       ]
     }

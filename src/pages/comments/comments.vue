@@ -52,7 +52,7 @@
 <script>
 import { mapState } from 'vuex'
 import commentsHeader from 'src/components/header/head'
-import commentList from './children/detailContent'
+import commentList from './children/comment-list'
 import { newLongComments, newShortComments, newShortCommentsBefore } from 'src/service/getData'
 
 export default {
@@ -74,7 +74,7 @@ export default {
       'detailId'
     ])
   },
-  route {
+  route: {
     beforeRouterEnter (transition) {
       this.getLongComments()
       window.addEventListener('scroll', this.getShortCommentsBefore, false)

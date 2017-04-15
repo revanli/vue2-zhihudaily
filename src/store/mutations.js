@@ -1,4 +1,8 @@
-import { TOGGLE_MENU, SAVE_DETAILID } from './mutation-types.js'
+import { 
+  TOGGLE_MENU,
+  SAVE_DETAILID,
+  SAVE_EXTRA
+} from './mutation-types.js'
 
 export default {
   [TOGGLE_MENU](state, {}) {
@@ -6,5 +10,8 @@ export default {
   },
   [SAVE_DETAILID](state, id) {
     state.detailId = id
+  },
+  [SAVE_EXTRA](state, data) {
+    state.extra = data
   }
 }

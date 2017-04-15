@@ -11,10 +11,14 @@
         <i class="iconfont">&#xe604</i>
       </div>
       <div class="header-icon">
-        <i class="iconfont">&#xe606</i>
+        <router-link to="/comments" class="link-icon">
+          <i class="iconfont">&#xe606</i>
+          <span>{{ extra.comments }}</span>
+        </router-link>
       </div>
       <div class="header-icon">
         <i class="iconfont">&#xe611</i>
+        <span>{{ extra.popularity }}</span>
       </div>
     </div>
   </detail-header>
@@ -46,7 +50,7 @@
 
       <!-- 合集 -->
       <section v-if="section.name" class="section">
-        <router-link :to="{path: '/section'}" class="section-link">
+        <router-link to="/section" class="section-link">
           <img :src="replaceImgUrl(thumbnail)">
           <p>本文来自: {{ section.name }} • 合集</p>
           <div class="arrow"></div>
@@ -62,7 +66,7 @@
 import detailHeader from 'src/components/header/head'
 import detailContent from './children/detailContent'
 import { replaceImgUrl } from 'src/components/common/mixin'
-import { newContent } from 'src/service/getData'
+import { newContent, extraNews } from 'src/service/getData'
 import { mapMutations } from 'vuex'
 
 export default {
@@ -75,7 +79,8 @@ export default {
       thumbnail: '',  // 合集缩略图
       section: {}, // 合集
       recommenders: [],  // 推荐人
-      detailContent: ''   // 消息实体
+      detailContent: '',   // 消息实体
+      extra: {}  // 新闻附加信息
     }
   },
   components: {
@@ -85,9 +90,15 @@ export default {
   mounted () {
     this.initData()
   },
+  created () {
+    this.getExtraData()
+  },
+  watch: {
+    '$route': 'getExtraData'
+  },
   methods: {
     initData () {
-      let newId = this.$route.params.id
+      const newId = this.$route.params.id
       // 保存进vuex
       this.SAVE_DETAILID(newId)
       newContent(newId).then(res => {
@@ -102,8 +113,15 @@ export default {
         }
       })
     },
+    getExtraData () {
+      const newId = this.$route.params.id
+      extraNews(newId).then(res => {
+        this.extra = res
+        this.SAVE_EXTRA(res)
+      })
+    },
     ...mapMutations([
-      'SAVE_DETAILID'
+      'SAVE_DETAILID', 'SAVE_EXTRA'
     ])
   },
   mixins: [replaceImgUrl]
@@ -119,8 +137,11 @@ export default {
     cursor: pointer;
     flex: 1;
     text-align: center;
-    > i {
+    i {
       line-height: 53px;
+    }
+    .link-icon {
+      font-size: 18px;
     }
   }
 }
@@ -164,8 +185,4 @@ export default {
     color: #d3d3d3;
   }
 }
-
-
-
-  
 </style>

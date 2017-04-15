@@ -1,4 +1,8 @@
-import { TOGGLE_MENU, SAVE_DETAILID } from './mutation-types.js'
+import { 
+  TOGGLE_MENU,
+  SAVE_DETAILID,
+  SAVE_EXTRA
+} from './mutation-types.js'
 
 export default {
   toggleMenu ({commit, state}) {
@@ -6,5 +10,8 @@ export default {
   },
   saveDetailId ({commit, state}) {
     commit(SAVE_DETAILID, id)
+  },
+  saveExtra ({commit, state}) {
+    commit(SAVE_EXTRA, data)
   }
 }
