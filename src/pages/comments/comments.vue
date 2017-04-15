@@ -13,7 +13,7 @@
   <section class="long-comments">
     <ul>
       <li class="long-comments-nav">
-        <span>{{}}条长评</span>
+        <span>{{ extra.long_comments }}条长评</span>
       </li>
       <div v-if="extra.long_comments === 0" class="no-comments">
         <div class="no-comments-icon">
@@ -28,11 +28,11 @@
   <!-- 短评 -->
   <section class="short-comments">
     <ul id="short-comments-top">
-      <li class="short-comments-nav">
-        <span>{{}}条短评</span>
+      <li class="short-comments-nav" @click="getShortComments">
+        <span>{{ extra.short_comments }}条短评</span>
         <i class="iconfont down">&#xe628</i>
       </li>
-      <comment-list @click="show" v-for="item in shortComments" :item="item"></comment-list>
+      <comment-list @click="show" v-for="item in shortComments" :item="item" :key="item.key"></comment-list>
     </ul>
   </section>
 
@@ -64,14 +64,13 @@ export default {
     return {
       longComments: [],
       shortComments: [],
-      extra: {},
       showReply: false,
       id: ''
     }
   },
   computed: {
     ...mapState([
-      'detailId'
+      'detailId','extra'
     ])
   },
   route: {
@@ -96,7 +95,7 @@ export default {
     },
     getShortComments () {
       newShortComments(this.detailId).then(res => {
-        this.shortComments = res.components
+        this.shortComments = res.comments
         this.id = this.shortComments[this.shortComments.length - 1].id
       })
     },

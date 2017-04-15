@@ -2,7 +2,7 @@
 <template>
   <li class="comment-li">
     <figure class="avatar">
-      <img :src="item.avatar" alt="">
+      <img :src="replaceImgUrl(item.avatar)" alt="">
     </figure>
     <div class="comment-content">
       <div class="author">{{ item.author }}</div>
@@ -25,13 +25,15 @@
 </template>
 
 <script>
+import { replaceImgUrl } from 'src/components/common/mixin'
   export default {
     props: ['item'],
     data () {
       return {
 
       }
-    }
+    },
+    mixins: [replaceImgUrl]
   }
 </script>
 

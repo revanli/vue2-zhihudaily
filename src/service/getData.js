@@ -35,7 +35,7 @@ const beforeNews = date => fetch('GET', '/4/news/before/' + date, {})
  * @param {number} [id] [新闻ID]
  * @returns { long_comments, popularity, short_comments, comments } [长评论总数, 点赞, 短评论, 评论总数]
  */
-const extraNews = id => fetch('GET', '/4/news/story-extra/' + id, {})
+const extraNews = id => fetch('GET', '/4/story-extra/' + id, {})
 
 /**
  * 新闻对应长评论查看
@@ -97,6 +97,7 @@ export {
   extraNews,
   newLongComments,
   newShortComments,
+  newShortCommentsBefore,
   themes,
   themeConent,
   themeConentBefore,
