@@ -110,6 +110,7 @@ export default {
         if (res.section) {
           this.section = res.section
           this.thumbnail = res.section.thumbnail
+          this.SAVE_SECTIONID(res.section.id)
         }
       })
     },
@@ -121,7 +122,7 @@ export default {
       })
     },
     ...mapMutations([
-      'SAVE_DETAILID', 'SAVE_EXTRA'
+      'SAVE_DETAILID', 'SAVE_EXTRA', 'SAVE_SECTIONID'
     ])
   }
 }

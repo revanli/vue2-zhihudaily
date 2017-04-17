@@ -1,37 +1,43 @@
 <!-- section -->
 <template>
   <div>
-    <section-header :headerTitle="name"></section-header>
+    <section-header :headerTitle="name" :go-back="true"></section-header>
 
-    <story-list :story-list-arr="stories" v-load-more="loaderMore"></story-list>
+    <section-list :story-list-arr="stories" v-load-more="loaderMore"></section-list>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
   import sectionHeader from 'src/components/header/head'
-  import storyList from 'src/components/common/storyList'
+  import sectionList from 'src/components/common/storyList'
   import { sections, beforeSectionNews } from 'src/service/getData'
+
   export default {
     data () {
       return {
         stories: [],
         timestamp: '',
         name: '',
-        sectionId: '',
         preventRepeatRequest: false
       }
     },
     components: {
       sectionHeader,
-      storyList
+      sectionList
       // storyList
     },
     mounted () {
-      sections().then(res => {
+      sections(this.sectionId).then(res => {
         this.stories = res.stories
         this.timestamp = res.timestamp
         this.name = res.name
       })
+    },
+    computed: {
+      ...mapState([
+        'sectionId'
+      ])
     },
     methods: {
       loaderMore () {
@@ -40,7 +46,7 @@
         }
         this.preventRepeatRequest = true
         // 加载更多
-        beforeSectionNews(this.timestamp).then(res => {
+        beforeSectionNews(this.sectionId, this.timestamp).then(res => {
           this.stories = [...this.stories, ...res.stories]
           this.timestamp = res.timestamp
           this.preventRepeatRequest = false

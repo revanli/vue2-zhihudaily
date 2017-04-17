@@ -108,5 +108,6 @@ export {
   themeConent,
   themeConentBefore,
   recommenders,
+  sections,
   beforeSectionNews
 }

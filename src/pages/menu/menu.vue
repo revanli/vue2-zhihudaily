@@ -3,10 +3,12 @@
     <div class="container">
       <header class="menu-header">
         <div class="user">
-          <figure class="avatar">
-            <img src="https://avatars2.githubusercontent.com/u/12527604?v=3&s=40" alt="">
-          </figure>
-          <figcaption class="username">revan</figcaption>
+          <router-link to="/author" class="link-author">
+            <figure class="avatar">
+              <img src="https://avatars2.githubusercontent.com/u/12527604?v=3&s=40" alt="">
+            </figure>
+            <figcaption class="username">revan</figcaption>
+          </router-link>
         </div>
         <div class="user-setting">
           <div>
@@ -35,7 +37,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { themes } from 'src/service/getData'
 
 export default {
@@ -48,14 +50,26 @@ export default {
     this.initData()
   },
   computed: {
-    ...mapState(['isShowMenu'])
+    ...mapState([
+      'isShowMenu', 'toggleMenu'
+    ])
   },
   methods: {
     initData () {
       themes().then(res => {
-        console.log(res)
         this.themeList = [...res.others]
       })
+    },
+    ...mapActions([
+      'toggleMenu'
+    ]),
+    hideMenu () {
+      this.toggleMenu()
+    }
+  },
+  route: {
+    beforeRouteLeave (to, from, next) {
+      this.toggleMenu()
     }
   }
 }
@@ -100,7 +114,11 @@ export default {
     .user {
       display: flex;
       flex-direction: row;
-      > .avatar {
+      .link-author {
+        display: flex;
+        flex-direction: row;
+      }
+      .avatar {
         width: 30px;
         height: 30px;
         border-radius: 50%;
@@ -110,7 +128,7 @@ export default {
           height: 30px;
         }
       }
-      > .username {
+      .username {
         margin-left: 20px;
         line-height: 30px;
         flex: 1;

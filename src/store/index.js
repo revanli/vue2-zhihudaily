@@ -9,7 +9,8 @@ Vue.use(Vuex)
 const state = {
   isShowMenu: false, // 是否显示theme menu
   detailId: 0, // 新闻的ID
-  extra: {}  // 新闻附加消息
+  extra: {},  // 新闻附加消息
+  sectionId: 0  // 合集ID
 }
 
 export default new Vuex.Store({

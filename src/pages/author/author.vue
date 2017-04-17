@@ -6,7 +6,7 @@
     <p class="name">revan</p>
     <ul>
       <li><a href="https://github.com/revanli/vue-zhihu-daily">项目github地址</a></li>
-      <li><a href="#">暂时没有博客的地址</a></li>
+      <li><a href="http://revan.me">博客的地址</a></li>
       <li><p>给一个star好吗</p></li>
     </ul>
     <div class="btn">
@@ -24,6 +24,7 @@
     height: auto;
     margin: 0 auto;
     padding: 30px 0;
+    margin-top: 50px;
     img{
       width: 80px;
       height: 80px;

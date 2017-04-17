@@ -1,7 +1,8 @@
 import { 
   TOGGLE_MENU,
   SAVE_DETAILID,
-  SAVE_EXTRA
+  SAVE_EXTRA,
+  SAVE_SECTIONID
 } from './mutation-types.js'
 
 export default {
@@ -13,5 +14,8 @@ export default {
   },
   [SAVE_EXTRA](state, data) {
     state.extra = data
+  },
+  [SAVE_SECTIONID](state, id) {
+    state.sectionId = id
   }
 }
