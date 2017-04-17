@@ -1,13 +1,19 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import router from './router'
 import store from './store/'
+import Directive from './config/directive'
+import Mixin from './config/mixin'
+import Filter from './config/filter'
 import FastClick from 'fastclick'
 // use px2rem and lib-flexible for mobile style
 import 'lib-flexible'
 
 Vue.config.productionTip = false
+
+// 全局
+Mixin(Vue)
+Directive(Vue)
+Filter(Vue)
 
 /* eslint-disable no-new */
 new Vue({

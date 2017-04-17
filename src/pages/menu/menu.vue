@@ -3,8 +3,10 @@
     <div class="container">
       <header class="menu-header">
         <div class="user">
-          <figure class="avatar"></figure>
-          <figcaption class="username"></figcaption>
+          <figure class="avatar">
+            <img src="https://avatars2.githubusercontent.com/u/12527604?v=3&s=40" alt="">
+          </figure>
+          <figcaption class="username">revan</figcaption>
         </div>
         <div class="user-setting">
           <div>
@@ -102,6 +104,11 @@ export default {
         width: 30px;
         height: 30px;
         border-radius: 50%;
+        overflow: hidden;
+        img {
+          width: 30px;
+          height: 30px;
+        }
       }
       > .username {
         margin-left: 20px;

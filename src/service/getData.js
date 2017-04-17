@@ -83,6 +83,12 @@ const themeConentBefore = (themeId, storyId) => fetch('GET', '/4/theme/' + theme
 const recommenders = id => fetch('GET', '/4/story/' + id + '/recommenders', {})
 
 /**
+ * 合集列表
+ * @param {number} [id] [新闻ID]
+ */
+const sections = id => fetch('GET', '/3/section/' + id, {})
+
+/**
  * 某个专栏之前的新闻
  * @param {number} [sectionId] [专栏ID]
  * @param {timestamp} [timestamp] [description]

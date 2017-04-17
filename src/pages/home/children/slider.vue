@@ -19,7 +19,6 @@
 
 <script>
 import Swiper from 'swiper'
-import { replaceImgUrl } from 'src/components/common/mixin'
 import { latestNews } from 'src/service/getData'
 
 export default {
@@ -45,8 +44,7 @@ export default {
         resistanceRatio: 0
       })
     })
-  },
-  mixins: [replaceImgUrl]
+  }
 }
 </script>
 

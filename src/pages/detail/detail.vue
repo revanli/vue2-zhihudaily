@@ -35,14 +35,14 @@
 
       <!-- 推荐者 -->
       <section class="recommenders" v-if="recommenders.length > 0">
-        <!-- <router-link :to="/recommenders"> -->
+        <router-link to="/recommenders">
           <p>推荐者</p>
           <div class="recomentders-item" v-for="item in recommenders">
             <figure>
               <img :src="replaceImgUrl(item.avatar)">
             </figure>
           </div>
-        <!-- </router-link> -->
+        </router-link>
       </section>
 
       <!-- 主体内容 -->
@@ -65,7 +65,7 @@
 <script>
 import detailHeader from 'src/components/header/head'
 import detailContent from './children/detailContent'
-import { replaceImgUrl } from 'src/components/common/mixin'
+// import { replaceImgUrl } from 'src/components/common/mixin'
 import { newContent, extraNews } from 'src/service/getData'
 import { mapMutations } from 'vuex'
 
@@ -123,8 +123,7 @@ export default {
     ...mapMutations([
       'SAVE_DETAILID', 'SAVE_EXTRA'
     ])
-  },
-  mixins: [replaceImgUrl]
+  }
 }
 </script>
 

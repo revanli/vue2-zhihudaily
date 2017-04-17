@@ -54,7 +54,6 @@
 <script>
 import themeHeader from 'src/components/header/head'
 import { themeConent, themeConentBefore } from 'src/service/getData'
-import { replaceImgUrl } from 'src/components/common/mixin'
 
 export default {
   components: {
@@ -139,8 +138,7 @@ export default {
         this.preventRepeatRequest = false
       }
     }
-  },
-  mixins: [replaceImgUrl]
+  }
 }
 </script>
 

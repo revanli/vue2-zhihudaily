@@ -1,30 +1,32 @@
 <template>
-  <!-- <div id="app">
-    <img src="./assets/logo.png">
+<div id="wrapper">
+  <!-- header & slider common components -->
+  <head-top :is-home="true" :header-title="'首页'" :go-back="false"></head-top>
+  <sliderMenu></sliderMenu>
+
+  <transition name="router-fade" mode="out-in">
     <router-view></router-view>
-  </div> -->
-  <div>
-    <transition name="router-fade" mode="out-in">
-      <router-view></router-view>
-    </transition>
-  </div>
+  </transition>
+</div>
 </template>
 
 <script>
+import headTop from 'src/components/header/head'
+import sliderMenu from 'src/pages/menu/menu'
+
 export default {
-  // name: 'app'
+  data () {
+    return {
+    }
+  },
+  components: {
+    headTop,
+    sliderMenu
+  }
 }
 </script>
 
 <style lang="scss">
-/* #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-} */
 @import './style/reset';
 @import './style/common';
 .router-fade-enter-active, .router-fade-leave-active {

@@ -25,16 +25,14 @@
 </template>
 
 <script>
-import { replaceImgUrl } from 'src/components/common/mixin'
-  export default {
-    props: ['item'],
-    data () {
-      return {
+export default {
+  props: ['item'],
+  data () {
+    return {
 
-      }
-    },
-    mixins: [replaceImgUrl]
+    }
   }
+}
 </script>
 
 <style scoped lang="scss">

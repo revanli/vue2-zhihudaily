@@ -21,12 +21,12 @@
           <p>深度长评虚位以待</p>
         </div>
       </div>
-      <comment-list @click="show" v-for="item in longComments" :item="item"></comment-list>
+      <comment-list @click="show" v-for="item in longComments" :item="item" :key="item.key"></comment-list>
     </ul>
   </section>
 
   <!-- 短评 -->
-  <section class="short-comments">
+  <section class="short-comments" v-load-more="getShortCommentsBefore">
     <ul id="short-comments-top">
       <li class="short-comments-nav" @click="getShortComments">
         <span>{{ extra.short_comments }}条短评</span>
@@ -73,23 +73,25 @@ export default {
       'detailId','extra'
     ])
   },
+  mounted () {
+    this.getLongComments()
+  },
   route: {
-    beforeRouterEnter (transition) {
-      this.getLongComments()
-      window.addEventListener('scroll', this.getShortCommentsBefore, false)
-      transition.next()
-    },
+    // beforeRouterEnter (transition) {
+    //   this.getLongComments()
+    //   window.addEventListener('scroll', this.getShortCommentsBefore, false)
+    //   transition.next()
+    // },
     destroyed (transition) {
       this.shortComments = []
       this.longComments = []
-      window.removeEventListener('scroll', this.getShortCommentsBefore, false)
+      // window.removeEventListener('scroll', this.getShortCommentsBefore, false)
       transition.next()
     }
   },
   methods: {
     getLongComments () {
       newLongComments(this.detailId).then(res => {
-        console.log(res)
         this.longComments = res.comments
       })
     },
@@ -100,10 +102,21 @@ export default {
       })
     },
     getShortCommentsBefore () {
+      if (this.id === '') {
+        return
+      }
       newShortCommentsBefore(this.detailId, this.id).then(res => {
         this.shortComments = this.shortComments.concat(res.comments)
         this.id = this.shortComments[this.shortComments.length - 1].id
       })
+    },
+    show () {
+      document.body.style.overflow = 'hidden'
+      this.showReply = !this.showReply
+    },
+    hidden () {
+      document.body.style.overflow = 'auto'
+      this.showReply = !this.showReply
     }
   }
 }
