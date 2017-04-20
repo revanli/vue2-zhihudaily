@@ -15,17 +15,16 @@
 
       <!-- 主编 -->
       <section class="theme-editor" v-if="editors.length > 0">
-        <router-link :to="{path: '/'}">
-          <p>主编</p>
-          <div class="editors-item" v-for="item in editors">
+        <p>主编</p>
+        <router-link :to="{path: '/'}" v-for="item in editors" :key="item.id">
+          <div class="editors-item">
             <img :src="replaceImgUrl(item.avatar)" alt="">
           </div>
         </router-link>
       </section>
 
       <!-- 列表 -->
-      <section class="theme-list">
-        <!-- <story-list v-for="item in stories" :item="item"></story-list> -->
+      <section class="theme-list" v-load-more="loaderMore">
         <div class="storylist">
           <div class="container">
             <ul>
@@ -36,7 +35,7 @@
                     <p class="time" v-if="item.display_date">{{ item.display_date }}</p>
                   </hgroup>
                   <figure class="list-img" v-if="item.images">
-                    <img :src="replaceImgUrl(item.images[0])" alt="">
+                    <img :src="replaceImgUrl(item.images[0])">
                     <figcaption v-if="item.multipic" class="tip"><i class="iconfont">&#xe61c</i>多图</figcaption>
                   </figure>
                 </section>
@@ -104,10 +103,14 @@ export default {
   },
   mounted () {
     this.initData()
-    window.addEventListener('scroll', this.loaderMore, false)
+  },
+  watch: {
+    // 路由变化的时候重新获取数据
+    '$route': 'initData'
   },
   methods: {
     initData () {
+      this.stories = []
       let themeId = this.$route.params.id
       themeConent(themeId).then(res => {
         this.editors = res.editors
@@ -118,25 +121,17 @@ export default {
         this.storyId = this.stories[this.stories.length - 1].id
       })
     },
-    getThemeBefore () {
-      let themeId = this.$route.params.id
-      themeConentBefore(themeId, this.storyId).then(res => {
-        this.stories = this.stories.concat(res.stories)
-        this.storyId = this.stories[this.stories.length - 1].id
-      })
-    },
     loaderMore () {
-      let offsetHeight = window.document.body.offsetHeight
-      let scrollTop = window.document.body.scrollTop
-      let scrollHeight = window.document.body.scrollHeight
-      if (offsetHeight + scrollTop + 100 > scrollHeight && !this.preventRepeatRequest) {
-        this.showLoading = true
-        this.preventRepeatRequest = true
-
-        // 加载更多
-        this.getThemeBefore()
-        this.preventRepeatRequest = false
+      if (this.preventRepeatRequest) {
+        return
       }
+      let themeId = this.$route.params.id
+      this.preventRepeatRequest = true
+      // 加载更多
+      themeConentBefore(themeId, this.storyId).then(res => {
+        this.stories = res.stories
+        this.preventRepeatRequest = false
+      })
     }
   }
 }

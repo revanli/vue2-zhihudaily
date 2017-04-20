@@ -2,7 +2,7 @@
 <template>
   <div>
     <section-header :headerTitle="name" :go-back="true"></section-header>
-
+    <!-- section list -->
     <section-list :story-list-arr="stories" v-load-more="loaderMore"></section-list>
   </div>
 </template>
@@ -10,7 +10,7 @@
 <script>
   import { mapState } from 'vuex'
   import sectionHeader from 'src/components/header/head'
-  import sectionList from 'src/components/common/storyList'
+  import sectionList from 'src/components/common/newsList'
   import { sections, beforeSectionNews } from 'src/service/getData'
 
   export default {
@@ -25,7 +25,6 @@
     components: {
       sectionHeader,
       sectionList
-      // storyList
     },
     mounted () {
       sections(this.sectionId).then(res => {

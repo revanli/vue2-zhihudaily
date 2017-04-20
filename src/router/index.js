@@ -74,10 +74,5 @@ export default new Router({
         }
       ]
     }
-    // {
-    //   path: '/detail/:id',
-    //   component: detail,
-    //   name: 'detail'
-    // }
   ]
 })

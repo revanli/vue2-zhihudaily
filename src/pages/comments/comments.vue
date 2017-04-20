@@ -52,7 +52,7 @@
 <script>
 import { mapState } from 'vuex'
 import commentsHeader from 'src/components/header/head'
-import commentList from './children/comment-list'
+import commentList from './children/commentList'
 import { newLongComments, newShortComments, newShortCommentsBefore } from 'src/service/getData'
 
 export default {

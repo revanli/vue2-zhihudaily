@@ -4,7 +4,7 @@
       <header class="menu-header">
         <div class="user">
           <router-link to="/author" class="link-author">
-            <figure class="avatar">
+            <figure class="avatar" @click="toggleMenu">
               <img src="https://avatars2.githubusercontent.com/u/12527604?v=3&s=40" alt="">
             </figure>
             <figcaption class="username">revan</figcaption>
@@ -23,11 +23,11 @@
       </header>
       <section class="themes-list">
         <router-link :to="{path: '/'}" class="link-home">
-          <p><i class="iconfont">&#xe61b</i>首页</p>
+          <p @click="toggleMenu"><i class="iconfont">&#xe61b</i>首页</p>
         </router-link>
         <ul>
           <router-link :to="'/theme/' + item.id" v-for="item in themeList" tag="li" :key="item.id" class="theme">
-            <p>{{ item.name }}</p>
+            <p @click="toggleMenu">{{ item.name }}</p>
             <i>+</i>
           </router-link>
         </ul>
@@ -51,7 +51,7 @@ export default {
   },
   computed: {
     ...mapState([
-      'isShowMenu', 'toggleMenu'
+      'isShowMenu'
     ])
   },
   methods: {
@@ -68,9 +68,6 @@ export default {
     }
   },
   route: {
-    beforeRouteLeave (to, from, next) {
-      this.toggleMenu()
-    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
 <div id="wrapper">
   <!-- header & slider common components -->
-  <head-top :is-home="true" :header-title="'首页'" :go-back="false"></head-top>
+  <!-- <head-top :is-home="true" :header-title="'首页'" :go-back="false"></head-top> -->
   <sliderMenu></sliderMenu>
 
   <transition name="router-fade" mode="out-in">
@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import headTop from 'src/components/header/head'
+// import headTop from 'src/components/header/head'
 import sliderMenu from 'src/pages/menu/menu'
 
 export default {
@@ -20,7 +20,7 @@ export default {
     }
   },
   components: {
-    headTop,
+    // headTop,
     sliderMenu
   }
 }

@@ -20,51 +20,19 @@
 </template>
 
 <script>
-// import { latestNews, beforeNews } from 'src/service/getData'
 
 export default {
+  // name: 'storylist',
   props: ['storyListArr'],
   data () {
     return {
-      // date: '', // 每一批加载9个story
-      // storyListArr: [], // 新闻列表数据
-      // preventRepeatRequest: false, // 到达底部加载数据，防止重复加载
-      // showLoading: true // 显示加载动画
     }
   },
   mounted () {
-    // this.initData()
-    // window.addEventListener('scroll', this.loaderMore, false)
   },
   methods: {
-  //   initData () {
-  //     // 获取数据
-  //     latestNews().then(res => {
-  //       this.storyListArr = res.stories
-  //       this.date = res.date
-  //     })
-  //   },
-  //   // 到达底部加载更多
-  //   loaderMore () {
-  //     let offsetHeight = window.document.body.offsetHeight
-  //     let scrollTop = window.document.body.scrollTop
-  //     let scrollHeight = window.document.body.scrollHeight
-  //     if (offsetHeight + scrollTop + 100 > scrollHeight && !this.preventRepeatRequest) {
-  //       this.showLoading = true
-  //       this.preventRepeatRequest = true
-
-  //       // 加载更多
-  //       beforeNews(this.date).then(res => {
-  //         this.storyListArr = [...this.storyListArr, ...res.stories]
-  //         this.date = res.date
-  //       })
-  //       this.preventRepeatRequest = false
-  //     }
-  //   }
-  // }
   }
 }
-
 </script>
 
 <style lang="scss">
