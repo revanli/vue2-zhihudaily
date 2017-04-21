@@ -1,13 +1,13 @@
 <template>
-  <nav class="slider">
+  <nav class="swiper">
     <div class="swiper-container">
       <div class="swiper-wrapper">
         <div class="swiper-slide" 
              v-for="(item, index) in topStories" :key="index" 
-             :style="{ backgroundImage: 'url(' + replaceImgUrl(item.image) + ')'}">
+             :style="{ backgroundImage: 'url(' + item.image + ')'}">
           <router-link :to="'/detail/' + item.id" :key="item.id">
             <div class="swiper-mask"></div>
-            <h1 class="slider-title">{{ item.title }}</h1>
+            <h1 class="swiper-title">{{ item.title }}</h1>
           </router-link>
         </div>
       </div>
@@ -51,7 +51,7 @@ export default {
 <style lang="scss">
 @import '../../../style/swiper.min.css';
 
-.slider {
+.swiper {
   margin-top: 50px
 }
 
@@ -72,7 +72,7 @@ export default {
     background-image: -webkit-linear-gradient(bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 100%);
     background-image: linear-gradient(bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.1) 100%);
   }
-  .slider-title {
+  .swiper-title {
     position: absolute;
     bottom: 23px;
     line-height: 1.2;

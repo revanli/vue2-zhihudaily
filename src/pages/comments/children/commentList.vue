@@ -2,7 +2,8 @@
 <template>
   <li class="comment-li">
     <figure class="avatar">
-      <img :src="replaceImgUrl(item.avatar)" alt="">
+      <!-- <img :src="replaceImgUrl(item.avatar)" alt=""> -->
+      <img :src="item.avatar" alt="">
     </figure>
     <div class="comment-content">
       <div class="author">{{ item.author }}</div>

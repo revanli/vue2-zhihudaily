@@ -9,7 +9,7 @@
       <li v-for="item in recommenders">
         <a :href="'http://www.zhihu.com/people/' + item.zhihu_url_token">
           <div class="img-box">
-            <img :src="replaceImgUrl(item.avatar)" alt="">
+            <img :src="item.avatar" alt="">
           </div>
           <div class="info">
             <p class="name">{{ item.name }}</p>
@@ -20,7 +20,7 @@
       <li v-for="item in editors">
         <a :href="'http://www.zhihu.com/people/' + item.zhihu_url_token">
           <div class="img-box">
-            <img :src="replaceImgUrl(item.avatar)" alt="">
+            <img :src="item.avatar" alt="">
           </div>
           <div class="info">
             <p class="name">{{ item.name }} <span class="zhubian">主编</span> </p>

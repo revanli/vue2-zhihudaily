@@ -5,7 +5,9 @@
   <sliderMenu></sliderMenu>
 
   <transition name="router-fade" mode="out-in">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view class="app-view"></router-view>
+    </keep-alive>
   </transition>
 </div>
 </template>
@@ -35,4 +37,13 @@ export default {
 .router-fade-enter, .router-fade-leave-active {
   opacity: 0;
 }
+.app-view {
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  position: absolute;
+  transition: transform 0.3s ease;
+  -webkit-overflow-scrolling: touch;
+}    
 </style>

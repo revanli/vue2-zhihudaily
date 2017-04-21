@@ -10,7 +10,6 @@ export default function directive (Vue) {
       // 只绑定一次，第一次绑定到元素时调用
       const windowHeight = window.screen.height
       let height
-      let setTop
       let paddingBottom
       let marginBottom
       let requestFram
@@ -33,7 +32,7 @@ export default function directive (Vue) {
         if (scrollType === 2) {
           height = height
         }
-        setTop = el.offsetTop
+        // setTop = el.offsetTop
         paddingBottom = getStyle(el, 'paddingBottom')
         marginBottom = getStyle(el, 'marginBottom')
       }, false)
@@ -61,7 +60,8 @@ export default function directive (Vue) {
       }
 
       const loadMore = () => {
-        if (scrollEl.scrollTop + windowHeight >= height + setTop + paddingBottom + marginBottom - scrollReduce) {
+        console.log(scrollEl.scrollTop, windowHeight, height, paddingBottom, marginBottom)
+        if (scrollEl.scrollTop + windowHeight >= height + paddingBottom + marginBottom - scrollReduce) {
           binding.value();
         }
       }

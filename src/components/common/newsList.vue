@@ -9,7 +9,8 @@
               <p class="time" v-if="item.display_date">{{ item.display_date }}</p>
             </hgroup>
             <figure class="list-img" v-if="item.images">
-              <img :src="replaceImgUrl(item.images[0])" alt="">
+              <!-- <img :src="replaceImgUrl(item.images[0])" alt=""> -->
+              <img :src="item.images[0]" alt="">
               <figcaption v-if="item.multipic" class="tip"><i class="iconfont">&#xe61c</i>多图</figcaption>
             </figure>
           </section>

@@ -2,14 +2,15 @@
   <div class="home">
     <!-- header & slider common components -->
     <head-top :is-home="true" :header-title="headerTitle" :go-back="false"></head-top>
-    <!-- <sliderMenu></sliderMenu> -->
-    <slider></slider>
-    <section class="section-stories" :class="'story-' + item.date" v-for="item in allStories" v-load-more="loaderMore">
+    <swiper></swiper>
+    <section class="section-stories" :class="'story-' + item.date" v-for="item in allStories">
       <h2 class="time-title">{{item.date | dateTime}}</h2>
       <news-list :story-list-arr="item.stories" type="2"></news-list>
     </section>
     <!-- 遮罩层 -->
     <div class="menu-mask" v-if="isShowMenu" @click="toggleMenu"></div>
+    <!-- 滑动加载更多组件 -->
+    <infinite-scroll :scroller="scroller" :loading="showLoading" @load="loaderMore" />
     <!-- 页面子路由 -->
     <router-view></router-view>
   </div>
@@ -18,9 +19,9 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import headTop from 'src/components/header/head'
-import slider from './children/slider'
+import swiper from './children/slider'
 import newsList from 'src/components/common/newsList'
-// import sliderMenu from 'src/pages/menu/menu'
+import infiniteScroll from 'src/components/common/infiniteScroll'
 import { latestNews, beforeNews } from 'src/service/getData'
 
 export default {
@@ -32,14 +33,15 @@ export default {
       allStories: [], // 所有新闻
       storyListArr: [], // 新闻列表数据
       preventRepeatRequest: false, // 到达底部加载数据，防止重复加载
-      showLoading: true // 显示加载动画
+      showLoading: false, // 显示加载动画
+      scroller: null
     }
   },
   components: {
     headTop,
-    slider,
-    newsList
-    // sliderMenu
+    swiper,
+    newsList,
+    infiniteScroll
   },
   computed: {
     ...mapState(['isShowMenu'])
@@ -58,6 +60,7 @@ export default {
       if (this.preventRepeatRequest) {
         return
       }
+      this.showLoading = true
       this.preventRepeatRequest = true
       // 加载更多
       beforeNews(this.date).then(res => {
@@ -65,11 +68,13 @@ export default {
         this.storyListArr = [...this.storyListArr, ...res.stories]
         this.date = res.date
         this.preventRepeatRequest = false
+        this.showLoading = false
       })
     }
   },
   mounted () {
     this.initData()
+    this.scroller = this.$el
   }
 }
 </script>

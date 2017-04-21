@@ -4,11 +4,14 @@
   <!-- 详情页头部 -->
   <theme-header :is-home="true" :header-title="headerTitle"></theme-header>
 
+  <!-- 遮罩层 -->
+  <div class="menu-mask" v-if="isShowMenu" @click="toggleMenu"></div>
+
   <div class="theme">
     <div class="container">
 
       <!-- 封面 -->
-      <section class="theme-cover" :style="{ backgroundImage: 'url(' + replaceImgUrl(bgImg) + ')' }">
+      <section class="theme-cover" :style="{ backgroundImage: 'url(' + bgImg + ')' }">
         <h1 class="theme-description">{{ description }}</h1>
         <p class="theme-image-source">{{ imageSource }}</p>
       </section>
@@ -18,13 +21,13 @@
         <p>主编</p>
         <router-link :to="{path: '/'}" v-for="item in editors" :key="item.id">
           <div class="editors-item">
-            <img :src="replaceImgUrl(item.avatar)" alt="">
+            <img :src="item.avatar" alt="">
           </div>
         </router-link>
       </section>
 
       <!-- 列表 -->
-      <section class="theme-list" v-load-more="loaderMore">
+      <section class="theme-list" v-load-more="loaderMore" type="2">
         <div class="storylist">
           <div class="container">
             <ul>
@@ -35,7 +38,7 @@
                     <p class="time" v-if="item.display_date">{{ item.display_date }}</p>
                   </hgroup>
                   <figure class="list-img" v-if="item.images">
-                    <img :src="replaceImgUrl(item.images[0])">
+                    <img :src="item.images[0]">
                     <figcaption v-if="item.multipic" class="tip"><i class="iconfont">&#xe61c</i>多图</figcaption>
                   </figure>
                 </section>
@@ -51,6 +54,7 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import themeHeader from 'src/components/header/head'
 import { themeConent, themeConentBefore } from 'src/service/getData'
 
@@ -70,6 +74,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['isShowMenu']),
     headerTitle () {
       switch (this.$route.params.id) {
         case '13':
@@ -109,6 +114,7 @@ export default {
     '$route': 'initData'
   },
   methods: {
+    ...mapActions(['toggleMenu']),
     initData () {
       this.stories = []
       let themeId = this.$route.params.id
@@ -137,7 +143,17 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.menu-mask {
+  position: fixed;
+  transform: translateZ(0);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  background: rgba(0, 0, 0, 0.7);
+}
 .theme {
   margin-top: 50px;
 }

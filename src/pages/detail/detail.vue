@@ -51,7 +51,7 @@
       <!-- 合集 -->
       <section v-if="section.name" class="section">
         <router-link to="/section" class="section-link">
-          <img :src="replaceImgUrl(thumbnail)">
+          <img :src="thumbnail">
           <p>本文来自: {{ section.name }} • 合集</p>
           <div class="arrow"></div>
         </router-link>
