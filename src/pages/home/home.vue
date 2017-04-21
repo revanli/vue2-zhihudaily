@@ -29,11 +29,11 @@ export default {
   data () {
     return {
       headerTitle: '首页',
-      date: '', // 每一批加载9个story
-      allStories: [], // 所有新闻
-      storyListArr: [], // 新闻列表数据
-      preventRepeatRequest: false, // 到达底部加载数据，防止重复加载
-      showLoading: false, // 显示加载动画
+      date: '',
+      allStories: [],
+      storyListArr: [],
+      preventRepeatRequest: false,
+      showLoading: false,
       scroller: null
     }
   },
