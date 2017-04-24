@@ -50,13 +50,8 @@ export default {
 
 <style lang="scss">
 @import '../../../style/swiper.min.css';
-
-.swiper {
-  margin-top: 50px
-}
-
 .swiper-container {
-  height: 230px;
+  height: 310px;
 }
 .swiper-slide {
   background-size: 100%;

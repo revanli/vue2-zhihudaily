@@ -2,7 +2,8 @@ import {
   TOGGLE_MENU,
   SAVE_DETAILID,
   SAVE_EXTRA,
-  SAVE_SECTIONID
+  SAVE_SECTIONID,
+  TOGGLE_TOP
 } from './mutation-types.js'
 
 export default {
@@ -17,5 +18,8 @@ export default {
   },
   saveSectionId ({commit, state}) {
     commit(SAVE_SECTIONID, id)
+  },
+  toggleTop ({commit, state}) {
+    commit(TOGGLE_TOP, flag)
   }
 }

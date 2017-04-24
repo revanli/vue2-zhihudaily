@@ -1,16 +1,22 @@
 <template>
   <div class="home">
     <!-- header & slider common components -->
-    <head-top :is-home="true" :header-title="headerTitle" :go-back="false"></head-top>
+    <head-top :is-home="true" :go-back="false"></head-top>
     <swiper></swiper>
+
     <section class="section-stories" :class="'story-' + item.date" v-for="item in allStories">
       <h2 class="time-title">{{item.date | dateTime}}</h2>
       <news-list :story-list-arr="item.stories" type="2"></news-list>
     </section>
+
+    <!-- loading -->
+    <loading :storyList="allStories"></loading>
     <!-- 遮罩层 -->
-    <div class="menu-mask" v-if="isShowMenu" @click="toggleMenu"></div>
+    <!-- <div class="menu-mask" v-if="isShowMenu" @click="toggleMenu"></div> -->
     <!-- 滑动加载更多组件 -->
     <infinite-scroll :scroller="scroller" :loading="showLoading" @load="loaderMore" />
+    <!-- 回到顶部组件 -->
+    <scroll-to-top :scroller="scroller"></scroll-to-top>
     <!-- 页面子路由 -->
     <router-view></router-view>
   </div>
@@ -22,6 +28,8 @@ import headTop from 'src/components/header/head'
 import swiper from './children/slider'
 import newsList from 'src/components/common/newsList'
 import infiniteScroll from 'src/components/common/infiniteScroll'
+import scrollToTop from 'src/components/common/scrollToTop'
+import loading from 'src/components/common/loading'
 import { latestNews, beforeNews } from 'src/service/getData'
 
 export default {
@@ -41,6 +49,8 @@ export default {
     headTop,
     swiper,
     newsList,
+    loading,
+    scrollToTop,
     infiniteScroll
   },
   computed: {

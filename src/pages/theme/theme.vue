@@ -2,7 +2,7 @@
 <template>
 <div>
   <!-- 详情页头部 -->
-  <theme-header :is-home="true" :header-title="headerTitle"></theme-header>
+  <theme-header :is-home="true"></theme-header>
 
   <!-- 遮罩层 -->
   <div class="menu-mask" v-if="isShowMenu" @click="toggleMenu"></div>
@@ -154,13 +154,13 @@ export default {
   z-index: 5;
   background: rgba(0, 0, 0, 0.7);
 }
-.theme {
-  margin-top: 50px;
-}
+// .theme {
+//   margin-top: 50px;
+// }
 .theme-cover {
   position: relative;
   z-index: 0;
-  height: 230px;
+  height: 310px;
   width: 100%;
   background-size: 100%;
   background-position: center;

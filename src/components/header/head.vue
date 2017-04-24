@@ -1,32 +1,20 @@
 <template>
-  <header class="head">
+  <header class="header">
     <div class="container">
       <div class="header-icon header-goback" v-if="goBack" @click="back">
-        <i class="iconfont">&#xe603</i>
+        <i class="iconfont icon-ic_back"></i>
       </div>
       <div class="header-icon" v-if="isHome" @click="toggleMenu">
-        <i class="iconfont">&#xe612</i>
+        <i class="iconfont icon-ic_menu"></i>
       </div>
-      <div class="header-title">
-        <span>{{ headerTitle}}</span>
-      </div>
-      <div class="header-icon" v-if="isHome">
-        <i class="iconfont">&#Xe610</i>
-      </div>
-      <div class="header-icon" v-if="isHome"> 
-        <i class="iconfont">&#Xe619</i>
-      </div>
-      <slot name="header-detail"></slot>
-      <slot name="header-comments"></slot>
     </div>
   </header>
 </template>
-
 <script>
 import { mapActions } from 'vuex'
 
 export default {
-  props: ['goBack', 'headerTitle', 'isHome'],
+  props: ['goBack', 'isHome'],
   methods: {
     ...mapActions(['toggleMenu']),
     back () {
@@ -37,38 +25,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.head > .container {
-  position: fixed;
-  display: flex;
-  flex-direction: row;
-  transform: translateZ(0);
-  top: 0;
-  z-index: 4;
-  height: 50px;
+.header > .container {
   width: 100%;
-  background: #00A2EA;
-  .header-icon {
-    cursor: pointer;
-    flex:1;
-    text-align: center;
-    > i {
-      line-height: 53px;
-    }
+  height: 1.5rem;
+  z-index: 9;
+  padding-left: 5%;
+  position: fixed;
+  background-image: linear-gradient(0deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.51) 95%);
+  .iconfont {
+    position: relative;
+    color: #fff;
+    font-size: 0.8rem;
+    top: 20%;
   }
-  .header-title {
-    flex: 6;
-    padding-left: 10px;
-    > span {
-      line-height: 50px;
-      color: #ffffff;
-      font-size: 16px;
-    }
-  }
-}
-.iconfont {
-  font-family: "iconfont";
-  font-size: 19px;
-  font-style: normal;
-  color: #fff;
 }
 </style>

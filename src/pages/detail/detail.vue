@@ -1,9 +1,11 @@
 <!-- 详情页 -->
 <template>
 <div>
+  <!-- loading -->
+  <loading :story-list="detailContent"></loading>
   <!-- 详情页头部 -->
-  <detail-header :is-home="false" :header-title="headerTitle" :go-back="true">
-    <div slot="header-detail" class="header-detail">
+  <detail-header :is-home="false" :go-back="true">
+    <!-- <div slot="header-detail" class="header-detail">
       <div class="header-icon">
         <i class="iconfont">&#xe61f</i>
       </div>
@@ -20,7 +22,7 @@
         <i class="iconfont">&#xe611</i>
         <span>{{ extra.popularity }}</span>
       </div>
-    </div>
+    </div> -->
   </detail-header>
 
   <section class="detail">
@@ -63,11 +65,11 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import detailHeader from 'src/components/header/head'
 import detailContent from './children/detailContent'
-// import { replaceImgUrl } from 'src/components/common/mixin'
 import { newContent, extraNews } from 'src/service/getData'
-import { mapMutations } from 'vuex'
+import loading from 'src/components/common/loading'
 
 export default {
   data () {
@@ -85,16 +87,11 @@ export default {
   },
   components: {
     detailHeader,
-    detailContent
+    detailContent,
+    loading
   },
   mounted () {
     this.initData()
-  },
-  created () {
-    this.getExtraData()
-  },
-  watch: {
-    '$route': 'getExtraData'
   },
   methods: {
     initData () {
@@ -114,15 +111,8 @@ export default {
         }
       })
     },
-    getExtraData () {
-      const newId = this.$route.params.id
-      extraNews(newId).then(res => {
-        this.extra = res
-        this.SAVE_EXTRA(res)
-      })
-    },
     ...mapMutations([
-      'SAVE_DETAILID', 'SAVE_EXTRA', 'SAVE_SECTIONID'
+      'SAVE_DETAILID', 'SAVE_SECTIONID'
     ])
   }
 }
@@ -145,13 +135,10 @@ export default {
     }
   }
 }
-.detail {
-  margin-top: 50px;
-}
 .detail-cover {
   position: relative;
   z-index: 0;
-  height: 200px;
+  height: 310px;
   width: 100%;
   background-size: 100%;
   background-position: center;
