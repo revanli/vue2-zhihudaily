@@ -25,18 +25,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header > .container {
-  width: 100%;
-  height: 1.5rem;
-  z-index: 9;
-  padding-left: 5%;
-  position: fixed;
-  background-image: linear-gradient(0deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.51) 95%);
-  .iconfont {
-    position: relative;
-    color: #fff;
-    font-size: 0.8rem;
-    top: 20%;
+.header {
+  .container {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1.5rem;
+    z-index: 9;
+    padding-left: 5%;
+    background-image: linear-gradient(0deg, rgba(0,0,0,0.00) 0%, rgba(0,0,0,0.51) 95%);
+    .iconfont {
+      position: relative;
+      color: #fff;
+      font-size: 0.8rem;
+      top: 20%;
+    }
   }
 }
 </style>

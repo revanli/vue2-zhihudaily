@@ -4,26 +4,7 @@
   <!-- loading -->
   <loading :story-list="detailContent"></loading>
   <!-- 详情页头部 -->
-  <detail-header :is-home="false" :go-back="true">
-    <!-- <div slot="header-detail" class="header-detail">
-      <div class="header-icon">
-        <i class="iconfont">&#xe61f</i>
-      </div>
-      <div class="header-icon">
-        <i class="iconfont">&#xe604</i>
-      </div>
-      <div class="header-icon">
-        <router-link to="/comments" class="link-icon">
-          <i class="iconfont">&#xe606</i>
-          <span>{{ extra.comments }}</span>
-        </router-link>
-      </div>
-      <div class="header-icon">
-        <i class="iconfont">&#xe611</i>
-        <span>{{ extra.popularity }}</span>
-      </div>
-    </div> -->
-  </detail-header>
+  <detail-header :is-home="false" :go-back="true"></detail-header>
 
   <section class="detail">
     <div class="container">
@@ -41,7 +22,7 @@
           <p>推荐者</p>
           <div class="recomentders-item" v-for="item in recommenders">
             <figure>
-              <img :src="replaceImgUrl(item.avatar)">
+              <img :src="item.avatar">
             </figure>
           </div>
         </router-link>
@@ -59,6 +40,9 @@
         </router-link>
       </section>
 
+      <!-- 回到顶部组件 -->
+      <scroll-to-top :scroller="scroller"></scroll-to-top>
+
     </div>
   </section>
 </div>
@@ -70,11 +54,11 @@ import detailHeader from 'src/components/header/head'
 import detailContent from './children/detailContent'
 import { newContent, extraNews } from 'src/service/getData'
 import loading from 'src/components/common/loading'
+import scrollToTop from 'src/components/common/scrollToTop'
 
 export default {
   data () {
     return {
-      headerTitle: '', // 导航栏标题
       title: '',  // 新闻标题
       image: '', // 新闻图片
       imageSource: '', // 新闻图片来源
@@ -82,16 +66,18 @@ export default {
       section: {}, // 合集
       recommenders: [],  // 推荐人
       detailContent: '',   // 消息实体
-      extra: {}  // 新闻附加信息
+      extra: {},  // 新闻附加信息
+      scroller: null
     }
   },
   components: {
     detailHeader,
     detailContent,
-    loading
+    loading,
+    scrollToTop
   },
   mounted () {
-    this.initData()
+    this.scroller = this.$el
   },
   methods: {
     initData () {
@@ -113,7 +99,17 @@ export default {
     },
     ...mapMutations([
       'SAVE_DETAILID', 'SAVE_SECTIONID'
-    ])
+    ]),
+  },
+  activated () {
+    this.initData()
+  },
+  deactivated () {
+    this.detailContent = ''
+    this.image = ''
+    this.title = ''
+    this.imageSource = ''
+    this.recommenders = ''
   }
 }
 </script>

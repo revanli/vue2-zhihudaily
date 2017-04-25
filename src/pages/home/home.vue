@@ -12,9 +12,8 @@
     <!-- loading -->
     <loading :storyList="allStories"></loading>
     <!-- 遮罩层 -->
-    <!-- <div class="menu-mask" v-if="isShowMenu" @click="toggleMenu"></div> -->
     <!-- 滑动加载更多组件 -->
-    <infinite-scroll :scroller="scroller" :loading="showLoading" @load="loaderMore" />
+    <infinite-scroll :scroller="scroller" :loading="showLoading" @load="loaderMore"></infinite-scroll>
     <!-- 回到顶部组件 -->
     <scroll-to-top :scroller="scroller"></scroll-to-top>
     <!-- 页面子路由 -->

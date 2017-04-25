@@ -1,5 +1,5 @@
 <template>
-  <div class="loading" v-if="!storyList.length || !storyList">
+  <div class="loading" v-if="!storyList || !storyList.length">
     <span class="left"></span>
     <span class="middle"></span>
     <span class="right"></span>

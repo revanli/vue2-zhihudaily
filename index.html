@@ -5,10 +5,23 @@
     <title>zhihu-daily</title>
     <!-- 解决图片防盗链问题 -->
     <meta name="referrer" content="never">
+    <!--忽略电话号码和email识别-->
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="format-detection" content="email=no"/>
+    <!--当网站添加到主屏幕快速启动方式，将网站添加到主屏幕快速启动方式-->
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <!--隐藏ios上的浏览器地址栏-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <!-- UC默认竖屏 ，UC强制全屏 -->
+    <meta name="full-screen" content="yes">
+    <meta name="browsermode" content="application">
+    <!-- QQ强制竖屏 QQ强制全屏 -->
+    <meta name="x5-orientation" content="portrait">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="x5-page-mode" content="app">
   </head>
   <body>
     <div id="app">
-      <!-- roter-view 要放到这里才正确 -->
       <router-view></router-view>
     </div>
     <!-- built files will be auto injected -->

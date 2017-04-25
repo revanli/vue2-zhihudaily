@@ -4,6 +4,9 @@
   <!-- 详情页头部 -->
   <theme-header :is-home="true"></theme-header>
 
+  <!-- loading -->
+  <loading :storyList="stories"></loading>
+
   <!-- 遮罩层 -->
   <div class="menu-mask" v-if="isShowMenu" @click="toggleMenu"></div>
 
@@ -27,7 +30,7 @@
       </section>
 
       <!-- 列表 -->
-      <section class="theme-list" v-load-more="loaderMore" type="2">
+      <section class="theme-list">
         <div class="storylist">
           <div class="container">
             <ul>
@@ -48,6 +51,10 @@
         </div>
       </section>
 
+      <!-- 滑动加载更多组件 -->
+      <infinite-scroll :scroller="scroller" :loading="showLoading" @load="loaderMore"></infinite-scroll>
+      <!-- 回到顶部组件 -->
+      <scroll-to-top :scroller="scroller"></scroll-to-top>
     </div>
   </div>
 </div>
@@ -57,10 +64,16 @@
 import { mapState, mapActions } from 'vuex'
 import themeHeader from 'src/components/header/head'
 import { themeConent, themeConentBefore } from 'src/service/getData'
+import infiniteScroll from 'src/components/common/infiniteScroll'
+import scrollToTop from 'src/components/common/scrollToTop'
+import loading from 'src/components/common/loading'
 
 export default {
   components: {
-    themeHeader
+    themeHeader,
+    infiniteScroll,
+    scrollToTop,
+    loading
   },
   data () {
     return {
@@ -70,53 +83,21 @@ export default {
       description: '',
       imageSource: '',
       storyId: '',   // 主题ID
-      preventRepeatRequest: false
+      scroller: null,
+      preventRepeatRequest: false,
+      showLoading: false
     }
   },
   computed: {
-    ...mapState(['isShowMenu']),
-    headerTitle () {
-      switch (this.$route.params.id) {
-        case '13':
-          return '日常心理学'
-        case '12':
-          return '用户推荐日报'
-        case '3':
-          return '电影日报'
-        case '11':
-          return '不许无聊'
-        case '4':
-          return '设计日报'
-        case '5':
-          return '大公司日报'
-        case '6':
-          return '财经日报'
-        case '10':
-          return '互联网安全'
-        case '2':
-          return '开始游戏'
-        case '7':
-          return '音乐日报'
-        case '9':
-          return '动漫日报'
-        case '8':
-          return '体育日报'
-        default:
-          return '首页'
-      }
-    }
+    ...mapState(['isShowMenu'])
   },
   mounted () {
-    this.initData()
+    this.scroller = this.$el
   },
-  watch: {
-    // 路由变化的时候重新获取数据
-    '$route': 'initData'
-  },
+  watch: {},
   methods: {
     ...mapActions(['toggleMenu']),
     initData () {
-      this.stories = []
       let themeId = this.$route.params.id
       themeConent(themeId).then(res => {
         this.editors = res.editors
@@ -132,13 +113,27 @@ export default {
         return
       }
       let themeId = this.$route.params.id
+      this.showLoading = true
       this.preventRepeatRequest = true
       // 加载更多
       themeConentBefore(themeId, this.storyId).then(res => {
-        this.stories = res.stories
+        this.showLoading = false
+        this.stories = [...this.stories, ...res.stories]
+        this.storyId = res.stories[res.stories.length - 1].id
         this.preventRepeatRequest = false
       })
     }
+  },
+  activated () {
+    this.initData()
+  },
+  deactivated () {
+    this.editors = []
+    this.stories = []
+    this.bgImg = ''
+    this.description = ''
+    this.imageSource = ''
+    this.storyId = ''
   }
 }
 </script>
@@ -154,9 +149,6 @@ export default {
   z-index: 5;
   background: rgba(0, 0, 0, 0.7);
 }
-// .theme {
-//   margin-top: 50px;
-// }
 .theme-cover {
   position: relative;
   z-index: 0;
