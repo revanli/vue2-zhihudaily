@@ -96,7 +96,7 @@ export default {
     ...mapActions(['toggleMenu']),
     initData () {
       let themeId = this.$route.params.id
-      if (themeId) {
+      if (themeId && themeId < 100) {
         themeConent(themeId).then(res => {
           this.editors = res.editors
           this.stories = res.stories
