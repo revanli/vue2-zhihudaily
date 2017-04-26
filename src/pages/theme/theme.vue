@@ -2,13 +2,10 @@
 <template>
 <div>
   <!-- 详情页头部 -->
-  <theme-header :is-home="true"></theme-header>
+  <theme-header :flag="false"></theme-header>
 
   <!-- loading -->
   <loading :storyList="stories"></loading>
-
-  <!-- 遮罩层 -->
-  <div class="menu-mask" v-if="isShowMenu" @click="toggleMenu"></div>
 
   <div class="theme">
     <div class="container">
@@ -99,17 +96,19 @@ export default {
     ...mapActions(['toggleMenu']),
     initData () {
       let themeId = this.$route.params.id
-      themeConent(themeId).then(res => {
-        this.editors = res.editors
-        this.stories = res.stories
-        this.bgImg = res.background
-        this.description = res.description
-        this.imageSource = res.image_source
-        this.storyId = this.stories[this.stories.length - 1].id
-      })
+      if (themeId) {
+        themeConent(themeId).then(res => {
+          this.editors = res.editors
+          this.stories = res.stories
+          this.bgImg = res.background
+          this.description = res.description
+          this.imageSource = res.image_source
+          this.storyId = this.stories[this.stories.length - 1].id
+        })
+      }
     },
     loaderMore () {
-      if (this.preventRepeatRequest) {
+      if (this.preventRepeatRequest || this.storyId === '') {
         return
       }
       let themeId = this.$route.params.id
@@ -122,6 +121,14 @@ export default {
         this.storyId = res.stories[res.stories.length - 1].id
         this.preventRepeatRequest = false
       })
+    },
+    clearData () {
+      this.editors = []
+      this.stories = []
+      this.bgImg = ''
+      this.description = ''
+      this.imageSource = ''
+      this.storyId = ''
     }
   },
   activated () {
@@ -134,6 +141,9 @@ export default {
     this.description = ''
     this.imageSource = ''
     this.storyId = ''
+  },
+  watch: {
+    '$route': 'initData'
   }
 }
 </script>

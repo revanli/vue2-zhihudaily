@@ -4,41 +4,20 @@
   <!-- loading -->
   <loading :story-list="detailContent"></loading>
   <!-- 详情页头部 -->
-  <detail-header :is-home="false" :go-back="true"></detail-header>
+  <detail-header :flag="true"></detail-header>
 
   <section class="detail">
     <div class="container">
       <!-- 详情页图 -->
-      <section class="detail-cover" v-if="image" :style="{ backgroundImage: 'url(' + replaceImgUrl(image) + ')'}">
+      <section class="detail-cover" v-if="image" :style="{ backgroundImage: 'url(' + image + ')'}">
         <div class="detail-cover-mask">
           <h1 class="detail-title">{{ title }}</h1>
           <p class="detail-image-source">{{ imageSource }}</p>
         </div>
       </section>
 
-      <!-- 推荐者 -->
-      <section class="recommenders" v-if="recommenders.length > 0">
-        <router-link to="/recommenders">
-          <p>推荐者</p>
-          <div class="recomentders-item" v-for="item in recommenders">
-            <figure>
-              <img :src="item.avatar">
-            </figure>
-          </div>
-        </router-link>
-      </section>
-
       <!-- 主体内容 -->
       <detail-content :content="detailContent"></detail-content>
-
-      <!-- 合集 -->
-      <section v-if="section.name" class="section">
-        <router-link to="/section" class="section-link">
-          <img :src="thumbnail">
-          <p>本文来自: {{ section.name }} • 合集</p>
-          <div class="arrow"></div>
-        </router-link>
-      </section>
 
       <!-- 回到顶部组件 -->
       <scroll-to-top :scroller="scroller"></scroll-to-top>
@@ -62,9 +41,6 @@ export default {
       title: '',  // 新闻标题
       image: '', // 新闻图片
       imageSource: '', // 新闻图片来源
-      thumbnail: '',  // 合集缩略图
-      section: {}, // 合集
-      recommenders: [],  // 推荐人
       detailContent: '',   // 消息实体
       extra: {},  // 新闻附加信息
       scroller: null
@@ -89,17 +65,11 @@ export default {
         this.image = res.image
         this.title = res.title
         this.imageSource = res.image_source
-        this.recommenders = res.recommenders ? res.recommenders : []
-        if (res.section) {
-          this.section = res.section
-          this.thumbnail = res.section.thumbnail
-          this.SAVE_SECTIONID(res.section.id)
-        }
       })
     },
     ...mapMutations([
       'SAVE_DETAILID', 'SAVE_SECTIONID'
-    ]),
+    ])
   },
   activated () {
     this.initData()
@@ -109,27 +79,18 @@ export default {
     this.image = ''
     this.title = ''
     this.imageSource = ''
-    this.recommenders = ''
+  },
+  watch: {},
+  beforeRouteEnter (to, from, next) {
+    // detect which page from
+    next()
   }
 }
 </script>
 
 <style lang="scss">
-.header-detail {
-  display: flex;
-  flex-direction: row;
-  width: 50%;
-  .header-icon {
-    cursor: pointer;
-    flex: 1;
-    text-align: center;
-    i {
-      line-height: 53px;
-    }
-    .link-icon {
-      font-size: 18px;
-    }
-  }
+.detail {
+  padding-top: 50px;
 }
 .detail-cover {
   position: relative;

@@ -1,10 +1,10 @@
 <template>
   <header class="header">
     <div class="container">
-      <div class="header-icon header-goback" v-if="goBack" @click="back">
+      <div class="header-icon header-goback" v-if="flag" @click="back">
         <i class="iconfont icon-ic_back"></i>
       </div>
-      <div class="header-icon" v-if="isHome" @click="toggleMenu">
+      <div class="header-icon" v-else @click="toggleMenu">
         <i class="iconfont icon-ic_menu"></i>
       </div>
     </div>
@@ -14,7 +14,7 @@
 import { mapActions } from 'vuex'
 
 export default {
-  props: ['goBack', 'isHome'],
+  props: ['flag'],
   methods: {
     ...mapActions(['toggleMenu']),
     back () {

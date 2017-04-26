@@ -1,12 +1,12 @@
 <template>
   <div class="home">
     <!-- header & slider common components -->
-    <head-top :is-home="true" :go-back="false"></head-top>
+    <head-top :flag="false"></head-top>
     <swiper></swiper>
 
     <section class="section-stories" :class="'story-' + item.date" v-for="item in allStories">
       <h2 class="time-title">{{item.date | dateTime}}</h2>
-      <news-list :story-list-arr="item.stories" type="2"></news-list>
+      <news-list :story-list-arr="item.stories"></news-list>
     </section>
 
     <!-- loading -->
