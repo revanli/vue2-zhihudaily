@@ -11,7 +11,8 @@ const state = {
   detailId: 0, // 新闻的ID
   extra: {},  // 新闻附加消息
   sectionId: 0,  // 合集ID
-  circleFlag: false  // back to top
+  circleFlag: false,  // back to top
+  isDocked: false // menu
 }
 
 export default new Vuex.Store({

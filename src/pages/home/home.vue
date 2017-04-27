@@ -102,7 +102,7 @@ export default {
 .time-title {
   color: #76787e;
   margin-left: 15px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   font-size: 14px;
   font-weight: 500;
 }

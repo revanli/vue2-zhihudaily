@@ -1,16 +1,16 @@
 <template>
-  <aside class="menu" :class="{'show-menu': isShowMenu}">
+  <aside class="menu" :class="{'show-menu': isShowMenu, 'docked': isDocked}">
     <ul>
       <router-link :to="{path: '/'}" class="link-home" tag="li">
-        <span @click="toggleMenu">首页</span>
+        <span @click="toggle">首页</span>
         <i class="iconfont icon-ic_star"></i>
       </router-link>
       <router-link :to="'/theme/' + item.id" v-for="item in themeList" tag="li" :key="item.id" class="theme">
-        <span @click="toggleMenu">{{ item.name }}</span>
+        <span @click="toggle">{{ item.name }}</span>
         <i class="iconfont icon-ic_star_black"></i>
       </router-link>
     </ul>
-    <div class="cover" @click="toggleMenu"></div>
+    <div class="cover" @click="toggle"></div>
   </aside>
 </template>
 
@@ -29,7 +29,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'isShowMenu'
+      'isShowMenu',
+      'isDocked'
     ])
   },
   methods: {
@@ -39,10 +40,17 @@ export default {
       })
     },
     ...mapActions([
-      'toggleMenu'
+      'toggleMenu',
+      'toggleDocked'
     ]),
-    hideMenu () {
+    // hideMenu () {
+    //   this.toggleMenu()
+    // },
+    toggle () {
       this.toggleMenu()
+      setTimeout(() => {
+        this.toggleDocked()
+      }, 300)
     }
   },
   route: {
@@ -75,7 +83,7 @@ export default {
     overflow: auto;
     background: rgba(91,116,146,0.75);
     transform: translate(-100%, 0);
-    transition: transform 0.5s ease;
+    transition: transform 0.8s ease;
     -webkit-overflow-scrolling: touch;
     &::-webkit-scrollbar {
       display: none!important;
@@ -94,6 +102,7 @@ export default {
     .iconfont {
       float: right;
       font-size: 0.5rem;
+      color: #fff;
     }
     span {
       color: #fff;
@@ -115,7 +124,7 @@ export default {
       opacity: 1;
     }
   }
-  &.show-menu {
+  &.docked {
     visibility: visible;
     .cover {
       display: block;

@@ -89,9 +89,6 @@ export default {
 </script>
 
 <style lang="scss">
-.detail {
-  padding-top: 50px;
-}
 .detail-cover {
   position: relative;
   z-index: 0;

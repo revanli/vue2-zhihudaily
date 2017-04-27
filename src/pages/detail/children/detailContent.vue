@@ -1,15 +1,15 @@
 <!-- 详情内容页 -->
 <template>
-  <div class="detail-content" v-html="replaceContent"></div>
+  <div class="detail-content" v-html="content"></div>
 </template>
 
 <script>
   export default {
     props: ['content'],
     computed: {
-      replaceContent () {
-        return this.content.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
-      }
+      // replaceContent () {
+      //   return this.content.replace(/http\w{0,1}:\/\/p/g, 'https://images.weserv.nl/?url=p')
+      // }
     }
   }
 </script>

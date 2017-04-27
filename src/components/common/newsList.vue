@@ -38,9 +38,9 @@ export default {
 
 <style lang="scss">
 .iconfont {
-  font-family:"iconfont";
+  font-family: "iconfont";
   font-size: 10px;
-  font-style:normal;
+  font-style: normal;
   color: #ffffff;
   margin-right: 3px;
 }
